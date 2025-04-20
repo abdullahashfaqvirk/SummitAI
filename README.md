@@ -121,4 +121,4 @@ Pull requests and ideas are welcome! Let’s make meeting management smarter tog
 
 ## 📄 License
 
-MIT License © 2025 Abdullah Ashfaq
+[MIT License](LICENSE) © 2025 [Abdullah Ashfaq](mailto:abdullahashfaq.ds@gmail.com).
