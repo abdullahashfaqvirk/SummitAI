@@ -1,0 +1,28 @@
+Meeting Summary - April 17, 2025
+
+Attendees: Sarah (PM), John (Frontend Dev), Aisha (Backend Dev), Mike (QA)
+
+Agenda: Review sprint progress and prepare for the product demo next week.
+
+Frontend Progress:
+John has completed 80% of the frontend work, including the dashboard UI.
+User profile page is in progress, expected to be completed in one day.
+
+Backend Progress:
+Aisha has completed APIs for login and data sync.
+Currently working on the analytics endpoint, expected by Friday.
+
+QA Update:
+Mike has started writing test cases for the dashboard.
+Found a critical bug related to data caching, details sent to Aisha.
+
+Action Items:
+John to prepare a 3-minute frontend demo flow by Monday.
+Aim to freeze development by Friday and start testing over the weekend.
+
+Blockers:
+Aisha to address the critical bug flagged by Mike today.
+
+Conclusion:
+No additional blockers reported.
+Meeting adjourned with a plan to proceed as scheduled.

@@ -1,0 +1,21 @@
+Participants:
+Abdullah Ashfaq (Team Lead)
+Zubair (React Developer)
+Etisam (Django Developer)
+
+Key Updates:
+Zubair: Completed the sidebar component for the dashboard, integrated with React Router, and set up state logic using Zustand. Working on the theme switcher and debugging a hydration mismatch error in the notification panel.
+Etisam: Finalized user authentication APIs with JWT-based login, registration, and email verification. Implemented rate limiting on the login endpoint. Facing CORS issues while integrating the AI model endpoint.
+
+Next Steps:
+Zubair: Finalize the notification panel, add Discord alert UI toggle, fix hydration error, and start styling AI summary cards if time permits.
+Etisam: Resolve CORS issue, finalize AI summarization API, add logging to backend tasks, and integrate the file system tool with the summary queue if possible.
+
+Decisions:
+The bot name is finalized as "IntelBrief."
+For the MVP, AI summaries will be processed immediately on upload.
+Discord alerts will include a high-level title, short summary, file name, and a link to the full report.
+
+Action Items:
+Ensure all work is committed cleanly before lunch for merging into the staging branch.
+Retry logic for failed summaries will be handled manually for now.

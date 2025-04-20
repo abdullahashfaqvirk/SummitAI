@@ -1,0 +1,24 @@
+Meeting Date: April 17, 2025  
+Attendees: Sarah (PM), John (Frontend Dev), Aisha (Backend Dev), Mike (QA)
+
+Sarah: Alright team, let's begin. Our main agenda today is to review the sprint progress and prepare for the product demo next week.
+
+John: The frontend is about 80% done. I’ve finished the dashboard UI and started on the user profile page. Just need one more day to finish that.
+
+Aisha: Backend APIs for login and data sync are done. I’m currently working on the analytics endpoint. It should be ready by Friday.
+
+Mike: I’ve started writing test cases for the dashboard and found one critical bug related to data caching. Sent the details to Aisha.
+
+Aisha: Got it, thanks Mike. I’ll take a look today and push a fix.
+
+Sarah: Great. We also need to prepare a quick demo script. John, can you handle the frontend walkthrough?
+
+John: Sure, I’ll prepare a 3-minute demo flow by Monday.
+
+Sarah: Awesome. Let’s aim to freeze development by Friday and start testing over the weekend. Any blockers?
+
+Mike: Nothing from my side.
+
+Aisha: Just the bug Mike flagged, but I’ll sort it out today.
+
+Sarah: Perfect. Thanks everyone!

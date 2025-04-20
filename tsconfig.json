@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}

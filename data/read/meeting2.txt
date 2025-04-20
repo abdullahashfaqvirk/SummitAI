@@ -1,0 +1,87 @@
+🧠 Project Standup Meeting – Transcript
+📅 Date: April 19, 2025
+⏰ Time: 10:00 AM – 10:45 AM
+📍 Platform: Google Meet
+
+Abdullah Ashfaq (Team Lead):
+Good morning, everyone! Let's kick off today’s standup. First, thanks for pushing things forward yesterday. We're moving in the right direction. I’d like a quick update from both of you, then we’ll talk about our next feature and deadlines. Zubair, can you start?
+
+Zubair (React Developer):
+Sure, Abdullah. So yesterday I completed the sidebar component for the dashboard. It’s responsive and integrated with React Router for navigation. I’ve also set up the state logic using Zustand, as we discussed. The theme switcher is also halfway done. The only blocker is the notification panel—it’s throwing a weird hydration mismatch error in dev mode. I’m debugging that today.
+
+Abdullah:
+Great progress. Zustand was a good call. The hydration issue might be due to SSR mismatch—check if you're conditionally rendering any browser-only components. If needed, let’s pair later today to solve it. Etisam, what about you?
+
+Etisam (Django Developer):
+Yeah, so on my end, I finalized the user authentication APIs. We now support JWT-based login, registration, and email verification. I’ve also implemented basic rate limiting on the login endpoint to prevent brute-force attacks. I started integrating the AI model endpoint but ran into some trouble with CORS. I’ll fix that today.
+
+Abdullah:
+Awesome, that's solid backend progress. For the CORS issue, make sure the React dev server’s origin is explicitly allowed in Django settings. Use django-cors-headers if needed. Also, great job thinking ahead with rate limiting—that’s often missed early on.
+
+Now, before we dive into the next feature, I want to talk about what we're demoing at the hackathon. We have two key deliverables:
+
+The AI-powered file summary feature
+
+The Discord alert integration
+
+Zubair:
+I’ve already explored Discord’s Webhook API. I can push alerts when a new file summary is generated. But I’m not sure what format or content we want in those alerts. Do we send full summaries or just high-level notifications?
+
+Abdullah:
+Good question. Let’s keep it lean—send a high-level title + short summary + file name, and a link to view the full report. Think of it like a Slack update. We can refine formatting later.
+
+Etisam:
+For the AI summaries, should we process the file immediately on upload or batch them?
+
+Abdullah:
+For the MVP, let's process immediately. We can switch to batch mode later for performance. But the real-time feel is more impressive at demos.
+
+Also, I want to bring up the naming issue. We’ll finalize the bot name today. My top picks are IntelBrief, SummitAI, and ExecuBrief. I’m leaning toward IntelBrief—it sounds sharp and professional. Any objections?
+
+Zubair:
+IntelBrief sounds cool. SummitAI is also good, but IntelBrief has more corporate appeal.
+
+Etisam:
+Agreed. IntelBrief it is.
+
+Abdullah:
+Perfect, it’s settled then. IntelBrief it is.
+
+Now, next steps. Zubair, your priorities today:
+
+Finalize the notification panel
+
+Add the Discord alert UI toggle in the settings
+
+Fix hydration error
+If time allows, start styling the AI summary cards.
+
+Etisam:
+
+Resolve CORS issue
+
+Finalize AI summarization API
+
+Add logging to backend tasks
+And if you’re free, integrate the file system tool with the summary queue.
+
+Etisam:
+Got it. One question though—do we need retry logic for failed summaries?
+
+Abdullah:
+Yes, but for now, just log failures and retry manually. We’ll build a proper retry queue after the demo.
+
+Also, a quick reminder: make sure everything is committed cleanly before lunch. I’ll be merging into the staging branch this afternoon.
+
+Any blockers or questions?
+
+Zubair:
+Nope, I’m good. Just need to check Zustand’s latest docs for some dynamic store patterns.
+
+Etisam:
+All good here too. I’ll Slack you if the CORS issue persists.
+
+Abdullah:
+Perfect. Let’s reconvene tomorrow, same time. Let’s keep up the momentum. Thanks guys.
+
+Meeting Ends – 10:45 AM
