@@ -1,156 +1,124 @@
-# Filesystem MCP Server
+# SummitAI — MCP Agent for Meeting Management
 
-Node.js server implementing Model Context Protocol (MCP) for filesystem operations.
+SummitAI is a powerful and extensible [Model Context Protocol (MCP)](https://modelcontextprotocol.org) agent designed to streamline your meeting documentation workflow. It can **summarize meeting notes**, **share results to Discord**, and manage files — all securely within scoped directories.
 
-## Features
+---
 
-- Read/write files
-- Create/list/delete directories
-- Move files/directories
-- Search files
-- Get file metadata
+## 🚀 Features
 
-**Note**: The server will only allow operations within directories specified via `args`.
+- 📄 **Summarize Meeting Notes** from `.txt`, `.doc`, and `.docx` files
+- 🔁 **Send summaries to Discord** for collaboration
+- ✏️ **Rename, Delete**, and manage documents with ease
+- 🔒 **Scoped access control** to restrict file operations within secure directories
 
-## API
+---
 
-### Resources
+## 📁 Directory Structure
 
-- `file://system`: File system operations interface
+The agent uses two scoped directories under `/data` for secure file operations:
 
-### Tools
+- `data/read/` — input meeting notes  
+- `data/write/` — output summaries and edited files
 
-- **read_file**
-  - Read complete contents of a file
-  - Input: `path` (string)
-  - Reads complete file contents with UTF-8 encoding
+Both directories are auto-initialized with full permissions (`777`) at runtime.
 
-- **read_multiple_files**
-  - Read multiple files simultaneously
-  - Input: `paths` (string[])
-  - Failed reads won't stop the entire operation
+---
 
-- **write_file**
-  - Create new file or overwrite existing (exercise caution with this)
-  - Inputs:
-    - `path` (string): File location
-    - `content` (string): File content
+## 🛠️ Tools & Capabilities
 
-- **edit_file**
-  - Make selective edits using advanced pattern matching and formatting
-  - Features:
-    - Line-based and multi-line content matching
-    - Whitespace normalization with indentation preservation
-    - Multiple simultaneous edits with correct positioning
-    - Indentation style detection and preservation
-    - Git-style diff output with context
-    - Preview changes with dry run mode
-  - Inputs:
-    - `path` (string): File to edit
-    - `edits` (array): List of edit operations
-      - `oldText` (string): Text to search for (can be substring)
-      - `newText` (string): Text to replace with
-    - `dryRun` (boolean): Preview changes without applying (default: false)
-  - Returns detailed diff and match information for dry runs, otherwise applies changes
-  - Best Practice: Always use dryRun first to preview changes before applying them
+| Tool               | Description |
+|--------------------|-------------|
+| `summarize_meeting` | Generate structured summaries from meeting notes |
+| `send_to_discord`   | Send a generated summary to Discord |
+| `rename_document`   | Rename a file in the write directory |
+| `delete_document`   | Delete a file from the write directory |
 
-- **create_directory**
-  - Create new directory or ensure it exists
-  - Input: `path` (string)
-  - Creates parent directories if needed
-  - Succeeds silently if directory exists
+---
 
-- **list_directory**
-  - List directory contents with [FILE] or [DIR] prefixes
-  - Input: `path` (string)
+## 🔎 Structured Summary Format
 
-- **move_file**
-  - Move or rename files and directories
-  - Inputs:
-    - `source` (string)
-    - `destination` (string)
-  - Fails if destination exists
+Summaries follow a professional structure with four main sections:
 
-- **search_files**
-  - Recursively search for files/directories
-  - Inputs:
-    - `path` (string): Starting directory
-    - `pattern` (string): Search pattern
-    - `excludePatterns` (string[]): Exclude any patterns. Glob formats are supported.
-  - Case-insensitive matching
-  - Returns full paths to matches
+- `📅 Meeting Summary`
+- `✅ Action Items`
+- `📌 Key Decisions`
+- `👥 Attendees`
 
-- **get_file_info**
-  - Get detailed file/directory metadata
-  - Input: `path` (string)
-  - Returns:
-    - Size
-    - Creation time
-    - Modified time
-    - Access time
-    - Type (file/directory)
-    - Permissions
+> Example Action Item:  
+> `- @alice: Finalize budget proposal by Friday`
 
-- **list_allowed_directories**
-  - List all directories the server is allowed to access
-  - No input required
-  - Returns:
-    - Directories that this server can read/write from
+---
 
-## Usage with Claude Desktop
-Add this to your `claude_desktop_config.json`:
+## 🧪 Supported File Types
 
-Note: you can provide sandboxed directories to the server by mounting them to `/projects`. Adding the `ro` flag will make the directory readonly by the server.
+- `.txt`
+- `.doc`
+- `.docx`
 
-### Docker
-Note: all directories must be mounted to `/projects` by default.
+For `.doc`/`.docx`, SummitAI uses `mammoth` to extract raw text for summarization.
 
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "--mount", "type=bind,src=/Users/username/Desktop,dst=/projects/Desktop",
-        "--mount", "type=bind,src=/path/to/other/allowed/dir,dst=/projects/other/allowed/dir,ro",
-        "--mount", "type=bind,src=/path/to/file.txt,dst=/projects/path/to/file.txt",
-        "mcp/filesystem",
-        "/projects"
-      ]
-    }
-  }
-}
-```
+---
 
-### NPX
+## ⚙️ Setup & Running
 
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/username/Desktop",
-        "/path/to/other/allowed/dir"
-      ]
-    }
-  }
-}
-```
-
-## Build
-
-Docker build:
-
+### 1. Clone the repository
 ```bash
-docker build -t mcp/filesystem -f src/filesystem/Dockerfile .
+git clone git@github.com:abdullahashfaqvirk/SummitAI.git
+cd SummitAI
 ```
 
-## License
+### 2. Install dependencies
+```bash
+npm install
+pnpm install
+```
 
-This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+### 3. Build the project
+```bash
+npm run build
+```
+
+### 4. Run the MCP Agent (Option 1)
+```bash
+npx -y supergateway --stdio "uvx mcp-server-git"
+```
+
+### 5. Run the MCP Agent (Option 2 with compiled JS)
+```bash
+npx -y supergateway --stdio "node ./dist/index.js ." --port 8000 --baseUrl "http://localhost" --ssePath /sse --messagePath /message --cors "*"
+```
+
+### 6. Optional: Expose Locally Running Server
+```bash
+ngrok http 8000
+```
+
+---
+
+## 📦 Tech Stack
+
+- Node.js
+- TypeScript
+- Zod for input validation
+- Mammoth for `.docx` parsing
+- MCP SDK for agent-server communication
+
+---
+
+## 🧰 Development Tips
+
+- All file paths are validated and scoped for security
+- Permissions (chmod 666/777) are explicitly set for compatibility
+- Extend the `CallToolRequestSchema` handler to add more capabilities
+
+---
+
+## 🤝 Contributing
+
+Pull requests and ideas are welcome! Let’s make meeting management smarter together.
+
+---
+
+## 📄 License
+
+MIT License © 2025 Abdullah Ashfaq
